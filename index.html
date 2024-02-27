@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon-32x32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- imported font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container" class="container bg-light-grey">
+      <header>
+        <div id="title" class="title">
+          <img id="quizTitleImage" src="" alt="quiz-title-image">
+          <h3 id="quizTitle" class="f-heading-s fc-dark-navy">HTML</h3>
+        </div>
+        <div class="d-l-mode">
+          <img id="sun-image" src="images/icon-sun-dark.svg" height="34px" alt="">
+          <label class="switch">
+            <input  type="checkbox" checked>
+            <span id="checkbox" class="slider round"></span>
+          </label>
+          <img id="moon-image" src="images/icon-moon-dark.svg" height="34px" alt="">
+        </div>
+      </header>
+      <!-- main end game -->
+      <main class="main-end">
+        <div class="left">
+          <h1 class="f-heading-l-reg fc-dark-navy">Quiz completed <br><span class="f-heading-l-bold fc-dark-navy">You scored...</span></h1>
+        </div>
+        <div class="right">
+          <div class="scoreBox bg-white">
+            <div><img src="images/icon-accessibility.svg" alt=""><h3 class="f-heading-s fc-dark-navy">Accessibility</h3></div>
+            <h1 id="final-score" class="f-display fc-dark-navy">8</h1>
+            <p class="f-body-m fc-dark-navy">out of 10</p>
+          </div>
+          <button class="bg-purple play-again-button" onclick="reloadPage()"><h3 class="f-heading-s fc-white">Play again</h3></button>
+        </div>
+      </main>
+      <!-- main -->
+      <main class="main">
+        
+        <div class="left">
+          <h1 id="main-title" class="f-heading-l-reg fc-dark-navy">Welcome to the <br><span class="f-heading-l-bold fc-dark-navy">Frontend Quiz</span></h1>
+          <p id="lb-dark-mode" class="f-body-s fc-dark-navy">Pick a subject to get started.</p>
+          <h1 id="displayQuestion" class="f-heading-m fc-dark-navy"><br>Question Here</h1>
+        </div>
+        <div class="right">
+          <button id="multi-choice-1" class="multi-choice-box bg-white">
+            <div class="multi-choice-title bg-light-orange" ><img src="images/icon-html.svg" alt=""></div>
+            <h3 h3 class="bg-light-grey multi-choice-letter f-heading-s fc-grey-navy">A</h3>
+            <div class="multi-choice-option"><h3 class="question-text f-heading-s fc-dark-navy">HTML</h3></div>
+          </button>
+          <button id="multi-choice-2" class="multi-choice-box bg-white">
+            <div class="multi-choice-title bg-light-green"><img src="images/icon-css.svg" alt=""></div>
+            <h3 h3 class="bg-light-grey multi-choice-letter f-heading-s fc-grey-navy">B</h3>
+            <div class="multi-choice-option"><h3 class="question-text f-heading-s fc-dark-navy">CSS</h3></div>
+          </button>
+          <button id="multi-choice-3" class="multi-choice-box bg-white">
+            <div class="multi-choice-title bg-light-blue"><img src="images/icon-js.svg" alt=""></div>
+            <h3 class="bg-light-grey multi-choice-letter f-heading-s fc-grey-navy">C</h3>
+            <div class="multi-choice-option"><h3 class="question-text f-heading-s fc-dark-navy">JavaScript</h3></div>
+          </button>
+          <button id="multi-choice-4" class="multi-choice-box bg-white">
+            <div class="multi-choice-title bg-light-purple"><img src="images/icon-accessibility.svg" alt=""></div>
+            <h3 class="bg-light-grey multi-choice-letter f-heading-s fc-grey-navy">D</h3>
+            <div class="multi-choice-option"><h3 class="question-text f-heading-s fc-dark-navy">Accessibility</h3></div>
+          </button>
+          <button id="submit-button" class="submit-button bg-purple f-heading-s fc-white">
+            <h3 class="f-heading-s fc-white">Submit</h3>
+          </button>
+          <h1 id="score"></h1>
+        </div>
+      </main>
+
+    </div>
+  </body>
+  <script>
+    function reloadPage(){
+      location.reload();
+    }
+    ////////
+    //JSON//
+    ////////
+    const fequiz =`
+    {
+    "quizzes": [
+        {
+            "title": "HTML",
+            "icon": "./assets/images/icon-html.svg",
+            "questions": [
+                {
+                    "question": "What does HTML stand for?",
+                    "options": [
+                        "Hyper Trainer Marking Language",
+                        "Hyper Text Marketing Language",
+                        "Hyper Text Markup Language",
+                        "Hyper Text Markup Leveler"
+                    ],
+                    "answer": "Hyper Text Markup Language"
+                },
+                {
+                    "question": "Which of the following is the correct structure for an HTML document?",
+                    "options": [
+                        "&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;",
+                        "&lt;head&gt;&lt;html&gt;&lt;/html&gt;&lt;body&gt;&lt;/body&gt;&lt;/head&gt;",
+                        "&lt;body&gt;&lt;head&gt;&lt;/head&gt;&lt;html&gt;&lt;/html&gt;&lt;/body&gt;",
+                        "&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;head&gt;&lt;/head&gt;&lt;/html&gt;"
+                    ],
+                    "answer": "&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;"
+                },
+                {
+                    "question": "Which HTML element is used to define the title of a document?",
+                    "options": [
+                        "&lt;head&gt;",
+                        "&lt;title&gt;",
+                        "&lt;header&gt;",
+                        "&lt;top&gt;"
+                    ],
+                    "answer": "&lt;title&gt;"
+                },
+                {
+                    "question": "What is the purpose of the &lt;body&gt; tag in HTML?",
+                    "options": [
+                        "It defines the document's head section.",
+                        "It contains all the content such as text, images, and links.",
+                        "It is used to define the main content of an HTML document.",
+                        "It specifies the body of the email content in HTML."
+                    ],
+                    "answer": "It contains all the content such as text, images, and links."
+                },
+                {
+                    "question": "Which HTML tag is used to create a hyperlink?",
+                    "options": [
+                        "&lt;hyperlink&gt;",
+                        "&lt;link&gt;",
+                        "&lt;a&gt;",
+                        "&lt;href&gt;"
+                    ],
+                    "answer": "&lt;a&gt;"
+                },
+                {
+                    "question": "Which tag is used to display images in HTML?",
+                    "options": [
+                        "&lt;img&gt;",
+                        "&lt;image&gt;",
+                        "&lt;src&gt;",
+                        "&lt;pic&gt;"
+                    ],
+                    "answer": "&lt;img&gt;"
+                },
+                {
+                    "question": "What attribute is used to provide the path of an image in the &lt;img&gt; tag?",
+                    "options": [
+                        "link",
+                        "src",
+                        "href",
+                        "url"
+                    ],
+                    "answer": "src"
+                },
+                {
+                    "question": "Which HTML tag is used to create an unordered list?",
+                    "options": [
+                        "&lt;ul&gt;",
+                        "&lt;ol&gt;",
+                        "&lt;list&gt;",
+                        "&lt;li&gt;"
+                    ],
+                    "answer": "&lt;ul&gt;"
+                },
+                {
+                    "question": "What does the &lt;br&gt; tag do?",
+                    "options": [
+                        "It breaks the text into two sections.",
+                        "It creates a bold text.",
+                        "It inserts a line break.",
+                        "It adds a new row in a table."
+                    ],
+                    "answer": "It inserts a line break."
+                },
+                {
+                    "question": "In HTML, what does the fieldset tag do?",
+                    "options": [
+                        "It is used to group related data in a form.",
+                        "It sets the field to a fixed size.",
+                        "It automatically validates the fields within a form.",
+                        "It hides the fields in a form."
+                    ],
+                    "answer": "It is used to group related data in a form."
+                }
+            ]
+        },
+        {
+            "title": "CSS",
+            "icon": "./assets/images/icon-css.svg",
+            "questions": [
+                {
+                    "question": "What does CSS stand for?",
+                    "options": [
+                        "Colorful Style Sheets",
+                        "Computer Style Sheets",
+                        "Cascading Style Sheets",
+                        "Creative Style Sheets"
+                    ],
+                    "answer": "Cascading Style Sheets"
+                },
+                {
+                    "question": "Which HTML attribute is used to define inline styles?",
+                    "options": [
+                        "styles",
+                        "style",
+                        "class",
+                        "font-style"
+                    ],
+                    "answer": "style"
+                },
+                {
+                    "question": "How do you insert a comment in a CSS file?",
+                    "options": [
+                        "// this is a comment //",
+                        "/* this is a comment */",
+                        "-- this is a comment --",
+                        "&lt;!-- this is a comment --&gt;"
+                    ],
+                    "answer": "/* this is a comment */"
+                },
+                {
+                    "question": "Which property is used to change the background color of an element?",
+                    "options": [
+                        "color",
+                        "bgcolor",
+                        "background-color",
+                        "background"
+                    ],
+                    "answer": "background-color"
+                },
+                {
+                    "question": "How do you apply a style to all &lt;p&gt; elements?",
+                    "options": [
+                        "p { }",
+                        ".p { }",
+                        "#p { }",
+                        "all.p { }"
+                    ],
+                    "answer": "p { }"
+                },
+                {
+                    "question": "Which property is used to change the font of an element?",
+                    "options": [
+                        "font-style",
+                        "text-style",
+                        "font-family",
+                        "typeface"
+                    ],
+                    "answer": "font-family"
+                },
+                {
+                    "question": "How do you make each word in a text start with a capital letter?",
+                    "options": [
+                        "text-transform: capitalize",
+                        "text-transform: uppercase",
+                        "text-style: capital",
+                        "font-transform: capitalize"
+                    ],
+                    "answer": "text-transform: capitalize"
+                },
+                {
+                    "question": "How do you select an element with the class name 'header'?",
+                    "options": [
+                        ".header",
+                        "#header",
+                        "header",
+                        "*header"
+                    ],
+                    "answer": ".header"
+                },
+                {
+                    "question": "What is the default value of the 'position' property?",
+                    "options": [
+                        "relative",
+                        "fixed",
+                        "absolute",
+                        "static"
+                    ],
+                    "answer": "static"
+                },
+                {
+                    "question": "What is the purpose of the z-index property in CSS?",
+                    "options": [
+                        "To count the number of elements",
+                        "To set the magnification level of an element",
+                        "To specify the stack order of an element",
+                        "To create a zoom effect"
+                    ],
+                    "answer": "To specify the stack order of an element"
+                }
+            ]
+        },
+        {
+            "title": "JavaScript",
+            "icon": "./assets/images/icon-js.svg",
+            "questions": [
+                {
+                    "question": "Which syntax is correct to output 'Hello World' in an alert box?",
+                    "options": [
+                        "alertBox('Hello World');",
+                        "msg('Hello World');",
+                        "alert('Hello World');",
+                        "msgBox('Hello World');"
+                    ],
+                    "answer": "alert('Hello World');"
+                },
+                {
+                    "question": "How do you call a function named 'myFunction'?",
+                    "options": [
+                        "call function myFunction()",
+                        "call myFunction()",
+                        "myFunction()",
+                        "execute myFunction()"
+                    ],
+                    "answer": "myFunction()"
+                },
+                {
+                    "question": "How to write an IF statement in JavaScript?",
+                    "options": [
+                        "if i = 5 then",
+                        "if (i == 5)",
+                        "if i == 5",
+                        "if i = 5"
+                    ],
+                    "answer": "if (i == 5)"
+                },
+                {
+                    "question": "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
+                    "options": [
+                        "if (i &lt;&gt; 5)",
+                        "if i =! 5 then",
+                        "if (i != 5)",
+                        "if i not = 5"
+                    ],
+                    "answer": "if (i != 5)"
+                },
+                  {
+                    "question": "How does a FOR loop start?",
+                    "options": [
+                        "for (i = 0; i &lt;= 5)",
+                        "for i = 1 to 5",
+                        "for (i &lt;= 5; i++)",
+                        "for (i = 0; i &lt;= 5; i++)"
+                    ],
+                    "answer": "for (i = 0; i &lt;= 5; i++)"
+                },
+                {
+                    "question": "How can you add a single-line comment in JavaScript?",
+                    "options": [
+                      "'This is a single-line comment",
+                      "//This is a single-line comment",
+                      "&lt;!--This is a single-line comment--&gt;",
+                      "/* This is a single-line comment */"
+                    ],
+                    "answer": "//This is a single-line comment"
+                },
+                {
+                    "question": "What is the correct way to write a JavaScript array?",
+                    "options": [
+                        "var colors = (1:'red', 2:'green', 3:'blue')",
+                        "var colors = ['red', 'green', 'blue']",
+                        "var colors = 'red', 'green', 'blue'",
+                        "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')"
+                    ],
+                    "answer": "var colors = ['red', 'green', 'blue']"
+                },
+                {
+                    "question": "How do you find the number with the highest value of x and y?",
+                    "options": [
+                        "Math.ceil(x, y)",
+                        "top(x, y)",
+                        "Math.max(x, y)",
+                        "Math.highest(x, y)"
+                    ],
+                    "answer": "Math.max(x, y)"
+                },
+                {
+                    "question": "Which operator is used to assign a value to a variable?",
+                    "options": [
+                        "-",
+                        "*",
+                        "=",
+                        "x"
+                    ],
+                    "answer": "="
+                },
+                {
+                    "question": "What is the correct way to write a JavaScript object?",
+                    "options": [
+                        "var person = {firstName: 'John', lastName: 'Doe'};",
+                        "var person = {firstName = 'John', lastName = 'Doe'};",
+                        "var person = (firstName: 'John', lastName: 'Doe');",
+                        "var person = (firstName = 'John', lastName = 'Doe');"
+                    ],
+                    "answer": "var person = {firstName: 'John', lastName: 'Doe'};"
+                }
+            ]
+        },
+        {
+            "title": "Accessibility",
+            "icon": "./assets/images/icon-accessibility.svg",
+            "questions": [
+                {
+                    "question": "What does 'WCAG' stand for?",
+                    "options": [
+                        "Web Content Accessibility Guidelines",
+                        "Web Compliance Accessibility Guide",
+                        "Web Content Accessibility Goals",
+                        "Website Compliance and Accessibility Guidelines"
+                    ],
+                    "answer": "Web Content Accessibility Guidelines"
+                },
+                {
+                    "question": "Which element is used to provide alternative text for images for screen reader users?",
+                    "options": [
+                        "&lt;alt&gt;",
+                        "&lt;figcaption&gt;",
+                        "&lt;description&gt;",
+                        "&lt;img alt='description'&gt;"
+                    ],
+                    "answer": "&lt;img alt='description'&gt;"
+                },
+                {
+                    "question": "What does ARIA stand for in web development?",
+                    "options": [
+                        "Accessible Rich Internet Applications",
+                        "Advanced Responsive Internet Assistance",
+                        "Accessible Responsive Internet Applications",
+                        "Automated Responsive Internet Actions"
+                    ],
+                    "answer": "Accessible Rich Internet Applications"
+                },
+                {
+                    "question": "Which of the following is not a principle of the WCAG?",
+                    "options": [
+                        "Perceivable",
+                        "Dependable",
+                        "Operable",
+                        "Understandable"
+                    ],
+                    "answer": "Dependable"
+                },
+                {
+                    "question": "Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA requirement for normal text?",
+                    "options": [
+                        "3:1",
+                        "4.5:1",
+                        "7:1",
+                        "2:1"
+                    ],
+                    "answer": "4.5:1"
+                },
+                {
+                    "question": "Which of the following elements is inherently focusable, meaning it can receive focus without a 'tabindex' attribute?",
+                    "options": [
+                        "&lt;div&gt;",
+                        "&lt;span&gt;",
+                        "&lt;a href='...'&gt;",
+                        "&lt;p&gt;"
+                    ],
+                    "answer": "&lt;a href='...'&gt;"
+                },
+                {
+                    "question": "What is the purpose of the 'lang' attribute in an HTML page?",
+                    "options": [
+                        "To specify the scripting language",
+                        "To define the character set",
+                        "To indicate the language of the page content",
+                        "To declare a language pack"
+                    ],
+                    "answer": "To indicate the language of the page content"
+                },
+                {
+                    "question": "Which guideline ensures that content is accessible by keyboard as well as by mouse?",
+                    "options": [
+                        "Keyboard Accessible",
+                        "Mouse Independence",
+                        "Device Independence",
+                        "Operable Controls"
+                    ],
+                    "answer": "Keyboard Accessible"
+                },
+                {
+                    "question": "What is the role of 'skip navigation' links in web accessibility?",
+                    "options": [
+                        "To skip over primary navigation to the main content",
+                        "To provide shortcuts to different sections of the website",
+                        "To help users skip unwanted sections like advertisements",
+                        "To bypass broken links in the navigation"
+                    ],
+                    "answer": "To skip over primary navigation to the main content"
+                },
+                {
+                    "question": "Which of these tools can help in checking the accessibility of a website?",
+                    "options": [
+                        "W3C Validator",
+                        "Google Lighthouse",
+                        "CSS Validator",
+                        "JavaScript Console"
+                    ],
+                    "answer": "Google Lighthouse"
+                }
+            ]
+        }
+    ]
+}
+`;
+    //global variables
+    let lightMode = "light";
+    ///////////////////////////////
+    //Light Mode/Dark Mode select//
+    ///////////////////////////////
+    document.getElementById("checkbox").addEventListener("click",function(){
+      if(lightMode == "light"){
+        document.getElementById("container").style.backgroundColor = "rgb(98,108,127)";
+        lightMode = "dark";
+        // cycle through text classes
+        var els = document.getElementsByClassName("fc-dark-navy");
+          for (var i = 0; i < els.length; i++) {
+            els[i].style.color = 'white';
+          }
+        // cycle through background colour classes
+        var els = document.getElementsByClassName("bg-white");
+          for (var i = 0; i < els.length; i++) {
+            els[i].style.backgroundColor = 'rgb(59,77,102)';
+          }
+        
+        //change sun and moon to dark ver
+        document.getElementById("sun-image").src="images/icon-sun-light.svg"
+        document.getElementById("moon-image").src="images/icon-moon-light.svg"
+
+        //change that one line that changes to light blue instead of white
+        document.getElementById("lb-dark-mode").style.color = "rgb(171,193,225)";
+
+      }else{
+        document.getElementById("container").style.backgroundColor = "rgb(244,246,250)";
+        lightMode = "light";
+        // cycle through text classes
+        var els = document.getElementsByClassName("fc-dark-navy");
+        for (var i = 0; i < els.length; i++) {
+          els[i].style.color = "rgb(49,62,81)";
+        }
+        // cycle through background colour classes
+        var els = document.getElementsByClassName("bg-white");
+        for (var i = 0; i < els.length; i++) {
+          els[i].style.backgroundColor = 'white';
+        }
+
+        //change sun and moon to dark ver
+        document.getElementById("sun-image").src="images/icon-sun-dark.svg"
+        document.getElementById("moon-image").src="images/icon-moon-dark.svg"
+      }
+    })
+    // end of light mode/dark mode select
+
+
+    ///////////
+    //Globals//
+    ///////////
+    const quizHtml = 0;
+    const quizCss = 1;
+    const quizJs = 2;
+    const quizAcc = 3;
+    const myQuiz = JSON.parse(fequiz);
+    var gameStarted = false;
+    var quizSelection = "";
+    var answerChoice = 0;
+    var correctAnswer = "hello";
+    var score = 0;
+
+
+    /////////////////////////////
+    //Multiple choice selection//
+    /////////////////////////////
+    document.getElementById("multi-choice-1").addEventListener("focus",function(){
+      document.getElementById("submit-button").style.display = "block";
+      if(gameStarted == false){
+        quizSelection = quizHtml;
+      }else{
+        answerChoice = 0;
+      }
+    });
+
+    document.getElementById("multi-choice-2").addEventListener("focus",function(){
+      document.getElementById("submit-button").style.display = "block";
+      if(gameStarted == false){
+      quizSelection = quizCss;
+      }else{
+        answerChoice = 1;
+      }
+
+    });
+
+    document.getElementById("multi-choice-3").addEventListener("focus",function(){
+      document.getElementById("submit-button").style.display = "block";
+      if(gameStarted == false){
+      quizSelection = quizJs;
+      }else{
+        answerChoice = 2;
+      }
+    });
+
+    document.getElementById("multi-choice-4").addEventListener("focus",function(){
+      document.getElementById("submit-button").style.display = "block";
+      if(gameStarted == false){
+      quizSelection = quizAcc;
+      }else{
+        answerChoice = 3;
+      }
+    });
+
+    /////////////////
+    //submit button//
+    /////////////////
+    document.getElementById("submit-button").addEventListener("click",function(){
+      
+      if(checkGameState() == false){
+        gameStarted = true;
+        this.innerHTML = "Submit Answer";
+        changeTitle();
+        correctAnswer = displayQuestion(quizSelection);
+      }else if(gameStarted == true && answerChoice > -1){
+        this.innerHTML = "Next Question";
+        checkAnswer(answerChoice);
+        answerChoice = -1;
+      }else if(gameStarted == true && answerChoice < 0){
+        this.innerHTML = "Submit Answer";
+        checkEndGame();
+        resetDefaultColors();
+        correctAnswer = displayQuestion(quizSelection);
+      }
+    });
+
+
+    ////////////////////
+    //check game state//
+    ////////////////////
+    function checkGameState(){
+      if(gameStarted == false){
+        return false;
+      }else{
+        return true;
+      }
+    }
+
+
+    //////////////////////////////////////////////////
+    //check whether all questions have been answered//
+    //////////////////////////////////////////////////
+    var nextQuestion = 0;
+    function checkEndGame(){
+      let els = document.getElementsByClassName("main");
+      let els2 = document.getElementsByClassName("main-end");
+      if(nextQuestion == 9){
+        document.getElementById("final-score").innerHTML = score;
+        els[0].style.display = "none";
+        els2[0].style.display = "flex";
+
+      }else{
+        nextQuestion++;
+      }
+    }
+
+
+    /////////////////////
+    //change quiz title//
+    /////////////////////
+    function changeTitle(){
+      let quizImage = document.getElementById("quizTitleImage");
+      let quizTitle = document.getElementById("quizTitle");
+      let answerImage = document.getElementsByClassName("multi-choice-title");
+      let answerLetter = document.getElementsByClassName("multi-choice-letter");
+      document.getElementById("title").style.display = "block";
+      quizImage.style.display = "inline";
+      quizTitle.style.display = "inline";
+      document.getElementById("main-title").style.display = "none";
+
+      if(quizSelection == 0){
+        quizImage.src = "images/icon-html.svg";
+        quizTitle.innerHTML = "HTML";
+      }
+      if(quizSelection == 1){
+        quizImage.src = "images/icon-css.svg";
+        quizTitle.innerHTML = "CSS";
+      }
+      if(quizSelection == 2){
+        quizImage.src = "images/icon-js.svg";
+        quizTitle.innerHTML = "JavaScript";
+      }
+      if(quizSelection == 3){
+        quizImage.src = "images/icon-accessibility.svg";
+        quizTitle.innerHTML = "Accessibility";
+      }
+      
+      for(i = 0; i < answerImage.length; i++){
+        answerImage[i].style.display = "none";
+        answerLetter[i].style.display = "block";
+      }
+
+    }
+
+    ////////////////////
+    //check the answer//
+    ////////////////////
+    function checkAnswer(number){
+      let elements = document.getElementsByClassName("question-text");
+      let els = document.getElementsByClassName("multi-choice-box");
+      let els2 = document.getElementsByClassName("multi-choice-letter");
+      let choice = elements[number].textContent;
+      if(choice === correctAnswer){
+        score++;
+        els[number].style.border = "rgb(38,215,130) 3px solid";
+        els2[number].style.backgroundColor = "rgb(38,215,130)";
+        els2[number].style.color = "white";
+      }else{
+        els[number].style.border = "red 3px solid";
+        els2[number].style.backgroundColor = "red";
+        els2[number].style.color = "white";
+      }
+    }
+
+
+    ///////////////////////////
+    //Reset to default colors//
+    ///////////////////////////
+    function resetDefaultColors(){
+    let els1 = document.getElementsByClassName("multi-choice-letter");
+    let els2 = document.getElementsByClassName("multi-choice-box");
+      for(i = 0; i<els1.length; i++){
+        els1[i].style.backgroundColor = "";
+        els1[i].style.color = "";
+        els2[i].style.border = "";
+      } 
+    }
+
+
+    ////////////////////////
+    //display the Question//
+    ////////////////////////
+    function displayQuestion(num){
+      let quizSelect = num;
+      let randQuestion = randomiseQuestion();
+      let questionChoice = document.getElementsByClassName("question-text");
+      let displayQuestion = document.getElementById("displayQuestion");
+      var answer = "";
+      document.getElementById("submit-button").style.display = "none";
+        //display question number
+        displayQuestionNumber();
+        //display question
+        displayQuestion.innerHTML = myQuiz.quizzes[quizSelect].questions[randQuestion].question;
+        //display answers
+        for(i=0;i < questionChoice.length; i++){
+          questionChoice[i].innerHTML = myQuiz.quizzes[quizSelect].questions[randQuestion].options[i];
+        }
+        //store answer
+        answer = myQuiz.quizzes[quizSelect].questions[randQuestion].answer;
+        
+      //display question
+      displayQuestion.style.display = "block";
+
+      return answer;
+
+    }
+
+
+    ///////////////////////////
+    //display question number//
+    ///////////////////////////
+    let questionNumber = 1;
+    function displayQuestionNumber(){
+      document.getElementById("lb-dark-mode").innerHTML = "Question "+questionNumber+" out of 10";
+      questionNumber++;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //simply returns an integer between 0 and 9 and ensures that number hasn't been chosen before//
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    let questionChosenArray = [0,0,0,0,0,0,0,0,0,0];
+    function randomiseQuestion(){
+      let checkLength = 0;
+      for(i=0;i<questionChosenArray.length;i++){
+        checkLength = checkLength + questionChosenArray[i];
+      } 
+      let randomNumber = 0;
+      if(checkLength < 10){
+        do{
+        randomNumber = Math.floor(Math.random()*10); //1 - 0
+        }while(questionChosenArray[randomNumber] == 1);
+      }
+
+      questionChosenArray[randomNumber] = 1;
+
+      return randomNumber;
+    }
+
+    
+  </script>
+  <!-- todo -->
+  <!-- implement questions and answers -->
+  <!-- implement timer -->
+  <!-- implement score -->
+  <!-- implement hovers and actives -->
+  <!-- add those 2 circles in the background -->
+
+
+  
+</html>
