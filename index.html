@@ -20,7 +20,7 @@
         </div>
         <div class="d-l-mode">
           <img id="sun-image" src="images/icon-sun-dark.svg" height="34px" alt="">
-          <label class="switch">
+          <label class="switch" for="checkbox">
             <input  type="checkbox" checked>
             <span id="checkbox" class="slider round"></span>
           </label>
@@ -34,11 +34,11 @@
         </div>
         <div class="right">
           <div class="scoreBox bg-white">
-            <div><h3 id="quizTitle" class="f-heading-s fc-dark-navy">Front End Quiz</h3></div>
+            <div><h3 class="f-heading-s fc-dark-navy">Your Front End Quiz Score</h3></div>
             <h1 id="final-score" class="f-display fc-dark-navy">8</h1>
             <p class="f-body-m fc-dark-navy">out of 10</p>
           </div>
-          <button class="bg-purple play-again-button" onclick="reloadPage()"><h3 class="f-heading-s fc-white">Play again</h3></button>
+          <button class="bg-purple play-again-button" onclick="reloadPage()"><h2 class="f-heading-s fc-white">Play again</h2></button>
         </div>
       </main>
       <!-- main -->
@@ -77,7 +77,6 @@
           <button id="submit-button" class="submit-button bg-purple f-heading-s fc-white">
             <h3 class="f-heading-s fc-white">Submit</h3>
           </button>
-          <h1 id="score"></h1>
         </div>
       </main>
 
@@ -541,8 +540,8 @@
           }
         
         //change sun and moon to dark ver
-        document.getElementById("sun-image").src="images/icon-sun-light.svg"
-        document.getElementById("moon-image").src="images/icon-moon-light.svg"
+        document.getElementById("sun-image").src="images/icon-sun-light.svg";
+        document.getElementById("moon-image").src="images/icon-moon-light.svg";
 
         //change that one line that changes to light blue instead of white
         document.getElementById("lb-dark-mode").style.color = "rgb(171,193,225)";

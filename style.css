@@ -17,7 +17,7 @@
   --ff-main: "Rubik", sans-serif;
 
   /* custom font size */
-  --fs-10: 0.75rem; /*12px*/
+  --fs-10: 1.25rem; /*20px*/
   --fs-20: 1.75rem; /*28px*/
   --fs-30: 2.25rem; /*36px*/
   --fs-40: 4rem; /*64px*/
@@ -341,6 +341,7 @@ header{
   border-radius: 24px;
   height: 92px;
   width: 564px;
+  border: none;
 }
 
 .play-again-button:active{
