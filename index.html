@@ -34,7 +34,7 @@
         </div>
         <div class="right">
           <div class="scoreBox bg-white">
-            <div><img src="images/icon-accessibility.svg" alt=""><h3 class="f-heading-s fc-dark-navy">Accessibility</h3></div>
+            <div><h3 id="quizTitle" class="f-heading-s fc-dark-navy">Front End Quiz</h3></div>
             <h1 id="final-score" class="f-display fc-dark-navy">8</h1>
             <p class="f-body-m fc-dark-navy">out of 10</p>
           </div>
@@ -48,12 +48,16 @@
           <h1 id="main-title" class="f-heading-l-reg fc-dark-navy">Welcome to the <br><span class="f-heading-l-bold fc-dark-navy">Frontend Quiz</span></h1>
           <p id="lb-dark-mode" class="f-body-s fc-dark-navy">Pick a subject to get started.</p>
           <h1 id="displayQuestion" class="f-heading-m fc-dark-navy"><br>Question Here</h1>
+          <div class="progress-container bg-white">
+            <div id="progress-bar" class="progress-bar bg-purple"></div>
+          </div>
         </div>
         <div class="right">
           <button id="multi-choice-1" class="multi-choice-box bg-white">
             <div class="multi-choice-title bg-light-orange" ><img src="images/icon-html.svg" alt=""></div>
             <h3 h3 class="bg-light-grey multi-choice-letter f-heading-s fc-grey-navy">A</h3>
-            <div class="multi-choice-option"><h3 class="question-text f-heading-s fc-dark-navy">HTML</h3></div>
+            <div class="multi-choice-option"><h3 class="question-text f-heading-s fc-dark-navy"><p></p>HTML</h3></div>
+
           </button>
           <button id="multi-choice-2" class="multi-choice-box bg-white">
             <div class="multi-choice-title bg-light-green"><img src="images/icon-css.svg" alt=""></div>
@@ -543,6 +547,9 @@
         //change that one line that changes to light blue instead of white
         document.getElementById("lb-dark-mode").style.color = "rgb(171,193,225)";
 
+        //change background image
+        document.getElementsByClassName("container")[0].style.backgroundImage = "url(images/pattern-background-desktop-dark.svg)"
+
       }else{
         document.getElementById("container").style.backgroundColor = "rgb(244,246,250)";
         lightMode = "light";
@@ -560,6 +567,8 @@
         //change sun and moon to dark ver
         document.getElementById("sun-image").src="images/icon-sun-dark.svg"
         document.getElementById("moon-image").src="images/icon-moon-dark.svg"
+
+        document.getElementsByClassName("container")[0].style.backgroundImage = "url(images/pattern-background-desktop-light.svg)"
       }
     })
     // end of light mode/dark mode select
@@ -626,15 +635,18 @@
     document.getElementById("submit-button").addEventListener("click",function(){
       
       if(checkGameState() == false){
+        //state of submit button before game has started
         gameStarted = true;
         this.innerHTML = "Submit Answer";
         changeTitle();
         correctAnswer = displayQuestion(quizSelection);
       }else if(gameStarted == true && answerChoice > -1){
+        //state of submit when game has started, but before player has checked an answer
         this.innerHTML = "Next Question";
         checkAnswer(answerChoice);
         answerChoice = -1;
       }else if(gameStarted == true && answerChoice < 0){
+        //state of submit button after player has checked an answer and game has started
         this.innerHTML = "Submit Answer";
         checkEndGame();
         resetDefaultColors();
@@ -668,20 +680,33 @@
         els2[0].style.display = "flex";
 
       }else{
+        progressBar();
         nextQuestion++;
       }
     }
 
 
-    /////////////////////
-    //change quiz title//
-    /////////////////////
+    /////////////////////////
+    //increase progress bar//
+    /////////////////////////
+    var progressAmount = 10;
+    function progressBar(){
+      let progressBar = document.getElementById("progress-bar");
+      progressAmount = progressAmount + 10;
+      progressBar.style.width = progressAmount+"%";
+    }
+
+
+    ////////////////////////////////////////////////
+    //change quiz title (and display progress bar)//
+    ////////////////////////////////////////////////
     function changeTitle(){
       let quizImage = document.getElementById("quizTitleImage");
       let quizTitle = document.getElementById("quizTitle");
       let answerImage = document.getElementsByClassName("multi-choice-title");
       let answerLetter = document.getElementsByClassName("multi-choice-letter");
       document.getElementById("title").style.display = "block";
+      document.getElementsByClassName("progress-container")[0].style.display = "block";
       quizImage.style.display = "inline";
       quizTitle.style.display = "inline";
       document.getElementById("main-title").style.display = "none";
@@ -717,7 +742,8 @@
       let elements = document.getElementsByClassName("question-text");
       let els = document.getElementsByClassName("multi-choice-box");
       let els2 = document.getElementsByClassName("multi-choice-letter");
-      let choice = elements[number].textContent;
+      let choice = elements[number].innerHTML;
+      console.log("The correct answer is: "+correctAnswer+" the players' answer was: "+choice);
       if(choice === correctAnswer){
         score++;
         els[number].style.border = "rgb(38,215,130) 3px solid";
